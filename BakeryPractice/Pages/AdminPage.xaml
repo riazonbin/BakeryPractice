@@ -17,8 +17,25 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Column="1" Grid.Row="1">
+            <StackPanel>
+                <ListView Name="materialListView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Image Source="{Binding Photo}" HorizontalAlignment="Left" Width="150"></Image>
+                                <TextBlock Text="{Binding Name, StringFormat=Наименование: {0}}"></TextBlock>
+                                <TextBlock Text="{Binding Count, StringFormat=Кол-во: {0}}" ></TextBlock>
+                                <TextBlock Text="{Binding Cost, StringFormat=Стоимость: {0}}"></TextBlock>
+                                <Button Content="Buy" Click="BuyButtonClick"></Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

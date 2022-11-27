@@ -19,6 +19,21 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <ListView>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image Source="{Binding Recipe.Photo}"></Image>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                            <TextBlock Text="{Binding Recipe.Cost}"></TextBlock>
+                            <TextBlock Text="{Binding Recipe.TimeToLive}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
         
     </Grid>
 </Page>

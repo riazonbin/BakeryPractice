@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BakeryPractice.ADOApp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,29 @@ namespace BakeryPractice.Pages
     /// </summary>
     public partial class AdminPage : Page
     {
+
         public AdminPage()
         {
             InitializeComponent();
+            materialListView.ItemsSource = App.Connection.Material.ToList();
+        }
+
+        private void BuyButtonClick(object sender, RoutedEventArgs e)
+        {
+            var boundData = (Material)((Button)sender).DataContext;
+
+
+
+
+            boundData.Count++;
+
+            App.Connection.Balance.FirstOrDefault().Summ -= boundData.Cost;
+
+            App.Connection.SaveChanges();
+
+            materialListView.Items.Refresh();
+
+
         }
     }
 }

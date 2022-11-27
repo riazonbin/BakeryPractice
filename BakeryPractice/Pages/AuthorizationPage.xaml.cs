@@ -1,5 +1,8 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +26,28 @@ namespace BakeryPractice.Pages
         public AuthorizationPage()
         {
             InitializeComponent();
+        }
+
+        private void AuthorizationButtonClick(object sender, RoutedEventArgs e)
+        {
+            if(tbLogin.Text != "" && tbPassword.Text != "")
+            {
+                var dataLogin = App.Connection.User.FirstOrDefault(x => x.Login == tbLogin.Text && x.Password == tbPassword.Text);
+                if(dataLogin is null)
+                {
+                    MessageBox.Show("No such user!");
+                    return;
+                }
+
+                if(dataLogin.Role_Id == 1)
+                {
+                    NavigationService.Navigate(new AdminPage());
+                }
+                else
+                {
+                    NavigationService.Navigate(new CashierPage());
+                }
+            }
         }
     }
 }

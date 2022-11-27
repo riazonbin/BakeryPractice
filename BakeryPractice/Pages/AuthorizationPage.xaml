@@ -24,7 +24,7 @@
             <TextBox materialDesign:HintAssist.Hint="Login" Name="tbLogin"></TextBox>
             <TextBox materialDesign:HintAssist.Hint="Password" Name="tbPassword"></TextBox>
             <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="Authorize" Margin="0, 0, 20, 0"></Button>
+                <Button Content="Authorize" Margin="0, 0, 20, 0" Click="AuthorizationButtonClick"></Button>
                 <Button Content="Registrate"></Button>
             </StackPanel>
         </StackPanel>
