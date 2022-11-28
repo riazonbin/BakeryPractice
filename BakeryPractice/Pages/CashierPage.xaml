@@ -20,20 +20,23 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="1" Grid.Column="1">
-            <ListView>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <Image Source="{Binding Recipe.Photo}"></Image>
-                            <TextBlock Text="{Binding Name}"></TextBlock>
-                            <TextBlock Text="{Binding Recipe.Cost}"></TextBlock>
-                            <TextBlock Text="{Binding Recipe.TimeToLive}"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
+        <ScrollViewer Grid.Row="1" Grid.Column="1">
+            <StackPanel>
+                <ListView Name="lvProducts">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Image Source="{Binding Recipe.Photo}" Width="100"></Image>
+                                <TextBlock Text="{Binding Name}"></TextBlock>
+                                <TextBlock Text="{Binding Recipe.Cost}"></TextBlock>
+                                <ProgressBar Height="15" Margin="0, 0, 0, 10" Minimum="0" Maximum="{Binding Recipe.TimeToLive}" Value="{Binding LeftTimeToLive}"></ProgressBar>
+                                <Button Content="Sell"></Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
         
     </Grid>
 </Page>

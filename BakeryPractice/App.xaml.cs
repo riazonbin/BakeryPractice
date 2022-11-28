@@ -17,5 +17,6 @@ namespace BakeryPractice
     public partial class App : Application
     {
         public static BakeryPracticeEntities Connection = new BakeryPracticeEntities();
+        public static DispatcherTimer dispatcherTimer = new DispatcherTimer();
     }
 }

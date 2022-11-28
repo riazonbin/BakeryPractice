@@ -23,6 +23,9 @@ namespace BakeryPractice.Pages
         public CashierPage()
         {
             InitializeComponent();
+            lvProducts.ItemsSource = App.Connection.Product.ToList();
+
+            App.dispatcherTimer.Tick += new EventHandler((s, e) => lvProducts.Items.Refresh());
         }
     }
 }
