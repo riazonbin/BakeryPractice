@@ -26,6 +26,7 @@ namespace BakeryPractice.Pages
         {
             InitializeComponent();
             materialListView.ItemsSource = App.Connection.Material.ToList();
+            tbBalance.Text = App.Connection.Balance.FirstOrDefault().Summ.ToString();
             App.dispatcherTimer.Tick += new EventHandler((s, e) => materialListView.ItemsSource = App.Connection.Material.ToList());
         }
 
@@ -40,6 +41,7 @@ namespace BakeryPractice.Pages
             App.Connection.SaveChanges();
 
             materialListView.ItemsSource = App.Connection.Material.ToList();
+            tbBalance.Text = App.Connection.Balance.FirstOrDefault().Summ.ToString();
 
 
         }

@@ -38,5 +38,10 @@
                 </ListView>
             </GroupBox>
         </ScrollViewer>
+
+        <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" materialDesign:BottomDashedLineAdorner.Brush="Bisque">
+            <materialDesign:PackIcon Kind="Money" Foreground="Green" Width="30" Height="25"/>
+            <TextBlock FontSize="18" x:Name="tbBalance" Text="0"></TextBlock>
+        </StackPanel>
     </Grid>
 </Page>

@@ -26,6 +26,7 @@ namespace BakeryPractice.Pages
         {
             InitializeComponent();
             lvProducts.ItemsSource = App.Connection.Product.ToList();
+            tbBalance.Text = App.Connection.Balance.FirstOrDefault().Summ.ToString();
 
             App.dispatcherTimer.Tick += new EventHandler((s, e) => lvProducts.ItemsSource = App.Connection.Product.ToList());
         }
@@ -48,6 +49,7 @@ namespace BakeryPractice.Pages
             App.Connection.Product.Remove(boundData);
             App.Connection.SaveChanges();
 
+            tbBalance.Text = App.Connection.Balance.FirstOrDefault().Summ.ToString();
             lvProducts.ItemsSource = App.Connection.Product.ToList();
         }
 
