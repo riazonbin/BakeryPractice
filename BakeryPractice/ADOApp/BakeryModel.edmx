@@ -63,7 +63,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="User_Id" Type="int" Nullable="false" />
-          <Property Name="Product_Id" Type="int" Nullable="false" />
+          <Property Name="Recipe_Id" Type="int" Nullable="false" />
           <Property Name="Cost" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
         </EntityType>
@@ -123,15 +123,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Sale_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+        <Association Name="FK_Sale_Recipe">
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
           <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Product">
+            <Principal Role="Recipe">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Sale">
-              <PropertyRef Name="Product_Id" />
+              <PropertyRef Name="Recipe_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -181,8 +181,8 @@
             <End Role="Recipe" EntitySet="Recipe" />
             <End Role="RecipeMaterial" EntitySet="RecipeMaterial" />
           </AssociationSet>
-          <AssociationSet Name="FK_Sale_Product" Association="Self.FK_Sale_Product">
-            <End Role="Product" EntitySet="Product" />
+          <AssociationSet Name="FK_Sale_Recipe" Association="Self.FK_Sale_Recipe">
+            <End Role="Recipe" EntitySet="Recipe" />
             <End Role="Sale" EntitySet="Sale" />
           </AssociationSet>
           <AssociationSet Name="FK_Sale_User" Association="Self.FK_Sale_User">
@@ -216,13 +216,13 @@
             <End Role="Recipe" EntitySet="Recipe" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK_Sale_Product" Association="BakeryPracticeModel.FK_Sale_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Sale" EntitySet="Sale" />
-          </AssociationSet>
           <AssociationSet Name="FK_RecipeMaterial_Recipe" Association="BakeryPracticeModel.FK_RecipeMaterial_Recipe">
             <End Role="Recipe" EntitySet="Recipe" />
             <End Role="RecipeMaterial" EntitySet="RecipeMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Recipe" Association="BakeryPracticeModel.FK_Sale_Recipe">
+            <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="Sale" EntitySet="Sale" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Role" Association="BakeryPracticeModel.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
@@ -259,9 +259,8 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Recipe_Id" Type="Int32" Nullable="false" />
           <Property Name="LeftTimeToLive" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Recipe" Relationship="BakeryPracticeModel.FK_Product_Recipe" FromRole="Product" ToRole="Recipe" />
-          <NavigationProperty Name="Sale" Relationship="BakeryPracticeModel.FK_Sale_Product" FromRole="Product" ToRole="Sale" />
           <Property Name="TotalCost" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="Recipe" Relationship="BakeryPracticeModel.FK_Product_Recipe" FromRole="Product" ToRole="Recipe" />
         </EntityType>
         <EntityType Name="Recipe">
           <Key>
@@ -274,6 +273,7 @@
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Product" Relationship="BakeryPracticeModel.FK_Product_Recipe" FromRole="Recipe" ToRole="Product" />
           <NavigationProperty Name="RecipeMaterial" Relationship="BakeryPracticeModel.FK_RecipeMaterial_Recipe" FromRole="Recipe" ToRole="RecipeMaterial" />
+          <NavigationProperty Name="Sale" Relationship="BakeryPracticeModel.FK_Sale_Recipe" FromRole="Recipe" ToRole="Sale" />
         </EntityType>
         <EntityType Name="RecipeMaterial">
           <Key>
@@ -299,10 +299,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="User_Id" Type="Int32" Nullable="false" />
-          <Property Name="Product_Id" Type="Int32" Nullable="false" />
+          <Property Name="Recipe_Id" Type="Int32" Nullable="false" />
           <Property Name="Cost" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Product" Relationship="BakeryPracticeModel.FK_Sale_Product" FromRole="Sale" ToRole="Product" />
+          <NavigationProperty Name="Recipe" Relationship="BakeryPracticeModel.FK_Sale_Recipe" FromRole="Sale" ToRole="Recipe" />
           <NavigationProperty Name="User" Relationship="BakeryPracticeModel.FK_Sale_User" FromRole="Sale" ToRole="User" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -351,18 +351,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Sale_Product">
-          <End Type="BakeryPracticeModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="BakeryPracticeModel.Sale" Role="Sale" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Sale">
-              <PropertyRef Name="Product_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RecipeMaterial_Recipe">
           <End Type="BakeryPracticeModel.Recipe" Role="Recipe" Multiplicity="1" />
           <End Type="BakeryPracticeModel.RecipeMaterial" Role="RecipeMaterial" Multiplicity="*" />
@@ -371,6 +359,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="RecipeMaterial">
+              <PropertyRef Name="Recipe_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Recipe">
+          <End Type="BakeryPracticeModel.Recipe" Role="Recipe" Multiplicity="1" />
+          <End Type="BakeryPracticeModel.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale">
               <PropertyRef Name="Recipe_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -399,7 +399,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -468,7 +468,7 @@
               <MappingFragment StoreEntitySet="Sale">
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Recipe_Id" ColumnName="Recipe_Id" />
                 <ScalarProperty Name="User_Id" ColumnName="User_Id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

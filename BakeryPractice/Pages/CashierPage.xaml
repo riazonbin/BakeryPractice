@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:BakeryPractice.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CashierPage" Background="White">
+      Title="Продажа товаров" Background="White">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -16,26 +16,26 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <ScrollViewer Grid.Row="1" Grid.Column="1">
-            <StackPanel>
+            <GroupBox Header="Товары">
                 <ListBox Name="lvProducts">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <Image Source="{Binding Recipe.Photo}" Width="150"></Image>
-                                <TextBlock Text="{Binding Name}"></TextBlock>
-                                <TextBlock Text="{Binding TotalCost}"></TextBlock>
-                                <ProgressBar Height="15" Margin="0, 0, 0, 10" Minimum="0" Maximum="{Binding Recipe.TimeToLive}" Value="{Binding LeftTimeToLive}"></ProgressBar>
+                                <Image Source="{Binding Recipe.Photo}" Width="200"></Image>
+                                <TextBlock Text="{Binding Name, StringFormat=Наименование: {0} }"></TextBlock>
+                                <TextBlock Text="{Binding TotalCost, StringFormat= Цена продажи: {0}}"></TextBlock>
+                                <ProgressBar Style="{x:Null}" Name="leftTimeBar" Height="15" Margin="0, 0, 0, 10" Minimum="0" Maximum="{Binding Recipe.TimeToLive}" Value="{Binding LeftTimeToLive}" Loaded="leftTimeBarLoaded"></ProgressBar>
                                 <Button Content="Sell" Click="SellButtonClick"></Button>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            </StackPanel>
+            </GroupBox>
         </ScrollViewer>
     </Grid>
 </Page>

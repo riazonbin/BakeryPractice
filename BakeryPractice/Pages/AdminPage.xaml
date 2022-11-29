@@ -6,8 +6,9 @@
       xmlns:local="clr-namespace:BakeryPractice.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AdminPage" Background="White"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+      Title="Закупка материалов" Background="White"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      >
 
     <Grid>
         <Grid.RowDefinitions>
@@ -21,12 +22,12 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <ScrollViewer Grid.Column="1" Grid.Row="1">
-            <StackPanel>
+            <GroupBox Header="Материалы">
                 <ListView Name="materialListView">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <Image Source="{Binding Photo}" HorizontalAlignment="Left" Width="150"></Image>
+                                <Image Source="{Binding Photo}" HorizontalAlignment="Left" Width="200"></Image>
                                 <TextBlock Text="{Binding Name, StringFormat=Наименование: {0}}"></TextBlock>
                                 <TextBlock Text="{Binding Count, StringFormat=Кол-во: {0}}" ></TextBlock>
                                 <TextBlock Text="{Binding Cost, StringFormat=Стоимость: {0}}"></TextBlock>
@@ -35,7 +36,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </StackPanel>
+            </GroupBox>
         </ScrollViewer>
     </Grid>
 </Page>

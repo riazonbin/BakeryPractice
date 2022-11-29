@@ -1,4 +1,5 @@
 ﻿using BakeryPractice.ADOApp;
+using MaterialDesignColors.Recommended;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,10 +36,38 @@ namespace BakeryPractice.Pages
 
             App.Connection.Balance.FirstOrDefault().Summ += (decimal)boundData.TotalCost;
 
+            App.Connection.Sale.Add(new Sale
+            {
+                Cost = (decimal)boundData.TotalCost,
+                Date = DateTime.Now,
+                Recipe = boundData.Recipe,
+                User = App.currentUser
+            });
+
+
             App.Connection.Product.Remove(boundData);
             App.Connection.SaveChanges();
 
             lvProducts.ItemsSource = App.Connection.Product.ToList();
+        }
+
+        private void leftTimeBarLoaded(object sender, RoutedEventArgs e)
+        {
+            var boundData = (Product)((ProgressBar)sender).DataContext;
+            ProgressBar bar = ((ProgressBar)sender);
+
+            if (boundData.LeftTimeToLive >= boundData.Recipe.TimeToLive * 0.70)
+            {
+                bar.Foreground = Brushes.Green;
+            }
+            else if (boundData.LeftTimeToLive >= boundData.Recipe.TimeToLive * 0.40)
+            {
+                bar.Foreground = Brushes.Yellow;
+            }
+            else
+            {
+                bar.Foreground = Brushes.Red;
+            }
         }
     }
 }

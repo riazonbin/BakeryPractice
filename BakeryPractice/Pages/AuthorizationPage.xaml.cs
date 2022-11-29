@@ -39,6 +39,8 @@ namespace BakeryPractice.Pages
                     return;
                 }
 
+                App.currentUser = dataLogin;
+
                 if(dataLogin.Role_Id == 1)
                 {
                     NavigationService.Navigate(new AdminPage());

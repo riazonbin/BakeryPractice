@@ -19,6 +19,7 @@ namespace BakeryPractice.ADOApp
         {
             this.Product = new HashSet<Product>();
             this.RecipeMaterial = new HashSet<RecipeMaterial>();
+            this.Sale = new HashSet<Sale>();
         }
     
         public int Id { get; set; }
@@ -31,5 +32,7 @@ namespace BakeryPractice.ADOApp
         public virtual ICollection<Product> Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RecipeMaterial> RecipeMaterial { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sale> Sale { get; set; }
     }
 }

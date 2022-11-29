@@ -16,11 +16,11 @@ namespace BakeryPractice.ADOApp
     {
         public int Id { get; set; }
         public int User_Id { get; set; }
-        public int Product_Id { get; set; }
+        public int Recipe_Id { get; set; }
         public decimal Cost { get; set; }
         public System.DateTime Date { get; set; }
     
-        public virtual Product Product { get; set; }
+        public virtual Recipe Recipe { get; set; }
         public virtual User User { get; set; }
     }
 }

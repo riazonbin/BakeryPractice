@@ -18,5 +18,6 @@ namespace BakeryPractice
     {
         public static BakeryPracticeEntities Connection = new BakeryPracticeEntities();
         public static DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        public static User currentUser= null;
     }
 }

@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="34bb85da2e064545b0f5de16826040a9" Name="Diagram1">
-        <EntityTypeShape EntityType="BakeryPracticeModel.Balance" Width="1.5" PointX="5.75" PointY="4.75" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.Material" Width="1.5" PointX="0.75" PointY="9" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.Product" Width="1.5" PointX="3" PointY="5" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.Recipe" Width="1.5" PointX="0.75" PointY="5" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.RecipeMaterial" Width="1.5" PointX="3" PointY="8.125" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.Role" Width="1.5" PointX="0.75" PointY="1.375" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.Sale" Width="1.5" PointX="5.25" PointY="1" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.User" Width="1.5" PointX="3" PointY="1" />
+      <Diagram DiagramId="34bb85da2e064545b0f5de16826040a9" Name="Diagram1" ZoomLevel="63">
+        <EntityTypeShape EntityType="BakeryPracticeModel.Balance" Width="1.5" PointX="5.75" PointY="1.5" />
+        <EntityTypeShape EntityType="BakeryPracticeModel.Material" Width="1.5" PointX="0.75" PointY="11.875" />
+        <EntityTypeShape EntityType="BakeryPracticeModel.Product" Width="1.5" PointX="3" PointY="10.75" />
+        <EntityTypeShape EntityType="BakeryPracticeModel.Recipe" Width="1.5" PointX="0.75" PointY="4.625" />
+        <EntityTypeShape EntityType="BakeryPracticeModel.RecipeMaterial" Width="1.5" PointX="3" PointY="5" />
+        <EntityTypeShape EntityType="BakeryPracticeModel.Role" Width="1.5" PointX="1.5" PointY="8.25" />
+        <EntityTypeShape EntityType="BakeryPracticeModel.Sale" Width="1.5" PointX="3" PointY="1.75" />
+        <EntityTypeShape EntityType="BakeryPracticeModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.5" />
+        <EntityTypeShape EntityType="BakeryPracticeModel.User" Width="1.5" PointX="0.75" PointY="0.75" />
         <AssociationConnector Association="BakeryPracticeModel.FK_RecipeMaterial_Material" />
         <AssociationConnector Association="BakeryPracticeModel.FK_Product_Recipe" />
-        <AssociationConnector Association="BakeryPracticeModel.FK_Sale_Product" />
         <AssociationConnector Association="BakeryPracticeModel.FK_RecipeMaterial_Recipe" />
+        <AssociationConnector Association="BakeryPracticeModel.FK_Sale_Recipe" />
         <AssociationConnector Association="BakeryPracticeModel.FK_User_Role" />
         <AssociationConnector Association="BakeryPracticeModel.FK_Sale_User" />
       </Diagram>
