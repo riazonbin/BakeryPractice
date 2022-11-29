@@ -22,21 +22,20 @@
 
         <ScrollViewer Grid.Row="1" Grid.Column="1">
             <StackPanel>
-                <ListView Name="lvProducts">
-                    <ListView.ItemTemplate>
+                <ListBox Name="lvProducts">
+                    <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <Image Source="{Binding Recipe.Photo}" Width="100"></Image>
+                                <Image Source="{Binding Recipe.Photo}" Width="150"></Image>
                                 <TextBlock Text="{Binding Name}"></TextBlock>
-                                <TextBlock Text="{Binding Recipe.Cost}"></TextBlock>
+                                <TextBlock Text="{Binding TotalCost}"></TextBlock>
                                 <ProgressBar Height="15" Margin="0, 0, 0, 10" Minimum="0" Maximum="{Binding Recipe.TimeToLive}" Value="{Binding LeftTimeToLive}"></ProgressBar>
-                                <Button Content="Sell"></Button>
+                                <Button Content="Sell" Click="SellButtonClick"></Button>
                             </StackPanel>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </StackPanel>
         </ScrollViewer>
-        
     </Grid>
 </Page>

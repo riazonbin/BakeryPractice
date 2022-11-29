@@ -26,14 +26,12 @@ namespace BakeryPractice.Pages
         {
             InitializeComponent();
             materialListView.ItemsSource = App.Connection.Material.ToList();
+            App.dispatcherTimer.Tick += new EventHandler((s, e) => materialListView.ItemsSource = App.Connection.Material.ToList());
         }
 
         private void BuyButtonClick(object sender, RoutedEventArgs e)
         {
             var boundData = (Material)((Button)sender).DataContext;
-
-
-
 
             boundData.Count++;
 
@@ -41,7 +39,7 @@ namespace BakeryPractice.Pages
 
             App.Connection.SaveChanges();
 
-            materialListView.Items.Refresh();
+            materialListView.ItemsSource = App.Connection.Material.ToList();
 
 
         }

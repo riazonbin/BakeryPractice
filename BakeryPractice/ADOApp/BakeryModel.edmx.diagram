@@ -5,25 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="34bb85da2e064545b0f5de16826040a9" Name="Diagram1">
-        <EntityTypeShape EntityType="BakeryPracticeModel.Balance" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.Material" Width="1.5" PointX="5.75" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.MaterialWarehouse" Width="1.5" PointX="8" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.Product" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.Recipe" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.RecipeMaterial" Width="1.5" PointX="8" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.Role" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.Sale" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="BakeryPracticeModel.Warehouse" Width="1.5" PointX="5.75" PointY="9.75" IsExpanded="true" />
-        <AssociationConnector Association="BakeryPracticeModel.FK_MaterialWarehouse_Material" ManuallyRouted="false" />
-        <AssociationConnector Association="BakeryPracticeModel.FK_RecipeMaterial_Material" ManuallyRouted="false" />
-        <AssociationConnector Association="BakeryPracticeModel.FK_MaterialWarehouse_Warehouse" ManuallyRouted="false" />
-        <AssociationConnector Association="BakeryPracticeModel.FK_Product_Recipe" ManuallyRouted="false" />
-        <AssociationConnector Association="BakeryPracticeModel.FK_Sale_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="BakeryPracticeModel.FK_RecipeMaterial_Recipe" ManuallyRouted="false" />
-        <AssociationConnector Association="BakeryPracticeModel.FK_User_Role" ManuallyRouted="false" />
-        <AssociationConnector Association="BakeryPracticeModel.FK_Sale_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BakeryPracticeModel.Balance" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BakeryPracticeModel.Material" Width="1.5" PointX="0.75" PointY="9" />
+        <EntityTypeShape EntityType="BakeryPracticeModel.Product" Width="1.5" PointX="3" PointY="5" />
+        <EntityTypeShape EntityType="BakeryPracticeModel.Recipe" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="BakeryPracticeModel.RecipeMaterial" Width="1.5" PointX="3" PointY="8.125" />
+        <EntityTypeShape EntityType="BakeryPracticeModel.Role" Width="1.5" PointX="0.75" PointY="1.375" />
+        <EntityTypeShape EntityType="BakeryPracticeModel.Sale" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="BakeryPracticeModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BakeryPracticeModel.User" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="BakeryPracticeModel.FK_RecipeMaterial_Material" />
+        <AssociationConnector Association="BakeryPracticeModel.FK_Product_Recipe" />
+        <AssociationConnector Association="BakeryPracticeModel.FK_Sale_Product" />
+        <AssociationConnector Association="BakeryPracticeModel.FK_RecipeMaterial_Recipe" />
+        <AssociationConnector Association="BakeryPracticeModel.FK_User_Role" />
+        <AssociationConnector Association="BakeryPracticeModel.FK_Sale_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

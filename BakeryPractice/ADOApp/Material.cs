@@ -17,7 +17,6 @@ namespace BakeryPractice.ADOApp
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Material()
         {
-            this.MaterialWarehouse = new HashSet<MaterialWarehouse>();
             this.RecipeMaterial = new HashSet<RecipeMaterial>();
         }
     
@@ -27,8 +26,6 @@ namespace BakeryPractice.ADOApp
         public decimal Cost { get; set; }
         public byte[] Photo { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MaterialWarehouse> MaterialWarehouse { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RecipeMaterial> RecipeMaterial { get; set; }
     }

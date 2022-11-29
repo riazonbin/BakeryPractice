@@ -24,6 +24,7 @@ namespace BakeryPractice.ADOApp
         public string Name { get; set; }
         public int Recipe_Id { get; set; }
         public int LeftTimeToLive { get; set; }
+        public Nullable<decimal> TotalCost { get; set; }
     
         public virtual Recipe Recipe { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

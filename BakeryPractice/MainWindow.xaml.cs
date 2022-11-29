@@ -41,6 +41,7 @@ namespace BakeryPractice
             foreach(var product in App.Connection.Product)
             {
                 product.LeftTimeToLive--;
+                product.TotalCost *= (decimal)0.95;
                 if(product.LeftTimeToLive <= 0)
                 {
                     App.Connection.Product.Remove(product);
@@ -65,6 +66,7 @@ namespace BakeryPractice
                             Name = recipe.Name,
                             LeftTimeToLive = recipe.TimeToLive,
                             Recipe = recipe,
+                            TotalCost = recipe.Cost
                         };
 
                         foreach(var materialId in newProduct.Recipe.RecipeMaterial)

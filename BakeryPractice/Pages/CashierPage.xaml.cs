@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BakeryPractice.ADOApp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,19 @@ namespace BakeryPractice.Pages
             InitializeComponent();
             lvProducts.ItemsSource = App.Connection.Product.ToList();
 
-            App.dispatcherTimer.Tick += new EventHandler((s, e) => lvProducts.Items.Refresh());
+            App.dispatcherTimer.Tick += new EventHandler((s, e) => lvProducts.ItemsSource = App.Connection.Product.ToList());
+        }
+
+        private void SellButtonClick(object sender, RoutedEventArgs e)
+        {
+            var boundData = (Product)((Button)sender).DataContext;
+
+            App.Connection.Balance.FirstOrDefault().Summ += (decimal)boundData.TotalCost;
+
+            App.Connection.Product.Remove(boundData);
+            App.Connection.SaveChanges();
+
+            lvProducts.ItemsSource = App.Connection.Product.ToList();
         }
     }
 }

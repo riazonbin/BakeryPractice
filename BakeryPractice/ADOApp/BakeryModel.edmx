@@ -22,15 +22,6 @@
           <Property Name="Cost" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="Photo" Type="image" Nullable="false" />
         </EntityType>
-        <EntityType Name="MaterialWarehouse">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Material_Id" Type="int" Nullable="false" />
-          <Property Name="Warehouse_Id" Type="int" Nullable="false" />
-          <Property Name="Count" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
@@ -39,6 +30,7 @@
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Recipe_Id" Type="int" Nullable="false" />
           <Property Name="LeftTimeToLive" Type="int" Nullable="false" />
+          <Property Name="TotalCost" Type="decimal" Precision="5" Scale="2" />
         </EntityType>
         <EntityType Name="Recipe">
           <Key>
@@ -95,37 +87,6 @@
           <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Role_Id" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Warehouse">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_MaterialWarehouse_Material">
-          <End Role="Material" Type="Self.Material" Multiplicity="1" />
-          <End Role="MaterialWarehouse" Type="Self.MaterialWarehouse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Material">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MaterialWarehouse">
-              <PropertyRef Name="Material_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MaterialWarehouse_Warehouse">
-          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
-          <End Role="MaterialWarehouse" Type="Self.MaterialWarehouse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Warehouse">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MaterialWarehouse">
-              <PropertyRef Name="Warehouse_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Product_Recipe">
           <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -201,7 +162,6 @@
         <EntityContainer Name="BakeryPracticeModelStoreContainer">
           <EntitySet Name="Balance" EntityType="Self.Balance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MaterialWarehouse" EntityType="Self.MaterialWarehouse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecipeMaterial" EntityType="Self.RecipeMaterial" Schema="dbo" store:Type="Tables" />
@@ -209,15 +169,6 @@
           <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_MaterialWarehouse_Material" Association="Self.FK_MaterialWarehouse_Material">
-            <End Role="Material" EntitySet="Material" />
-            <End Role="MaterialWarehouse" EntitySet="MaterialWarehouse" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MaterialWarehouse_Warehouse" Association="Self.FK_MaterialWarehouse_Warehouse">
-            <End Role="Warehouse" EntitySet="Warehouse" />
-            <End Role="MaterialWarehouse" EntitySet="MaterialWarehouse" />
-          </AssociationSet>
           <AssociationSet Name="FK_Product_Recipe" Association="Self.FK_Product_Recipe">
             <End Role="Recipe" EntitySet="Recipe" />
             <End Role="Product" EntitySet="Product" />
@@ -247,58 +198,82 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BakeryPracticeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BakeryPracticeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Balance" EntityType="BakeryPracticeModel.Balance" />
+          <EntitySet Name="Material" EntityType="BakeryPracticeModel.Material" />
+          <EntitySet Name="Product" EntityType="BakeryPracticeModel.Product" />
+          <EntitySet Name="Recipe" EntityType="BakeryPracticeModel.Recipe" />
+          <EntitySet Name="RecipeMaterial" EntityType="BakeryPracticeModel.RecipeMaterial" />
+          <EntitySet Name="Role" EntityType="BakeryPracticeModel.Role" />
+          <EntitySet Name="Sale" EntityType="BakeryPracticeModel.Sale" />
+          <EntitySet Name="sysdiagrams" EntityType="BakeryPracticeModel.sysdiagrams" />
+          <EntitySet Name="User" EntityType="BakeryPracticeModel.User" />
+          <AssociationSet Name="FK_RecipeMaterial_Material" Association="BakeryPracticeModel.FK_RecipeMaterial_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="RecipeMaterial" EntitySet="RecipeMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Recipe" Association="BakeryPracticeModel.FK_Product_Recipe">
+            <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Product" Association="BakeryPracticeModel.FK_Sale_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipeMaterial_Recipe" Association="BakeryPracticeModel.FK_RecipeMaterial_Recipe">
+            <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="RecipeMaterial" EntitySet="RecipeMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="BakeryPracticeModel.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_User" Association="BakeryPracticeModel.FK_Sale_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Balance">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Summ" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Summ" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Material">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Count" Type="Int32" Nullable="false" />
-          <Property Name="Cost" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
-          <NavigationProperty Name="MaterialWarehouse" Relationship="Self.FK_MaterialWarehouse_Material" FromRole="Material" ToRole="MaterialWarehouse" />
-          <NavigationProperty Name="RecipeMaterial" Relationship="Self.FK_RecipeMaterial_Material" FromRole="Material" ToRole="RecipeMaterial" />
-          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="MaterialWarehouse">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Material_Id" Type="Int32" Nullable="false" />
-          <Property Name="Warehouse_Id" Type="Int32" Nullable="false" />
-          <Property Name="Count" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Material" Relationship="Self.FK_MaterialWarehouse_Material" FromRole="MaterialWarehouse" ToRole="Material" />
-          <NavigationProperty Name="Warehouse" Relationship="Self.FK_MaterialWarehouse_Warehouse" FromRole="MaterialWarehouse" ToRole="Warehouse" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="Photo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="RecipeMaterial" Relationship="BakeryPracticeModel.FK_RecipeMaterial_Material" FromRole="Material" ToRole="RecipeMaterial" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Recipe_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Recipe" Relationship="Self.FK_Product_Recipe" FromRole="Product" ToRole="Recipe" />
-          <NavigationProperty Name="Sale" Relationship="Self.FK_Sale_Product" FromRole="Product" ToRole="Sale" />
           <Property Name="LeftTimeToLive" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Recipe" Relationship="BakeryPracticeModel.FK_Product_Recipe" FromRole="Product" ToRole="Recipe" />
+          <NavigationProperty Name="Sale" Relationship="BakeryPracticeModel.FK_Sale_Product" FromRole="Product" ToRole="Sale" />
+          <Property Name="TotalCost" Type="Decimal" Precision="5" Scale="2" />
         </EntityType>
         <EntityType Name="Recipe">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TimeToLive" Type="Int32" Nullable="false" />
-          <Property Name="Cost" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Recipe" FromRole="Recipe" ToRole="Product" />
-          <NavigationProperty Name="RecipeMaterial" Relationship="Self.FK_RecipeMaterial_Recipe" FromRole="Recipe" ToRole="RecipeMaterial" />
+          <NavigationProperty Name="Product" Relationship="BakeryPracticeModel.FK_Product_Recipe" FromRole="Recipe" ToRole="Product" />
+          <NavigationProperty Name="RecipeMaterial" Relationship="BakeryPracticeModel.FK_RecipeMaterial_Recipe" FromRole="Recipe" ToRole="RecipeMaterial" />
         </EntityType>
         <EntityType Name="RecipeMaterial">
           <Key>
@@ -307,16 +282,16 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Recipe_Id" Type="Int32" Nullable="false" />
           <Property Name="Material_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Material" Relationship="Self.FK_RecipeMaterial_Material" FromRole="RecipeMaterial" ToRole="Material" />
-          <NavigationProperty Name="Recipe" Relationship="Self.FK_RecipeMaterial_Recipe" FromRole="RecipeMaterial" ToRole="Recipe" />
+          <NavigationProperty Name="Material" Relationship="BakeryPracticeModel.FK_RecipeMaterial_Material" FromRole="RecipeMaterial" ToRole="Material" />
+          <NavigationProperty Name="Recipe" Relationship="BakeryPracticeModel.FK_RecipeMaterial_Recipe" FromRole="RecipeMaterial" ToRole="Recipe" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="BakeryPracticeModel.FK_User_Role" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="Sale">
           <Key>
@@ -325,16 +300,16 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="User_Id" Type="Int32" Nullable="false" />
           <Property Name="Product_Id" Type="Int32" Nullable="false" />
-          <Property Name="Cost" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Sale_Product" FromRole="Sale" ToRole="Product" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Sale_User" FromRole="Sale" ToRole="User" />
+          <NavigationProperty Name="Product" Relationship="BakeryPracticeModel.FK_Sale_Product" FromRole="Sale" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="BakeryPracticeModel.FK_Sale_User" FromRole="Sale" ToRole="User" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -345,36 +320,16 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Role_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
-          <NavigationProperty Name="Sale" Relationship="Self.FK_Sale_User" FromRole="User" ToRole="Sale" />
+          <NavigationProperty Name="Role" Relationship="BakeryPracticeModel.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Sale" Relationship="BakeryPracticeModel.FK_Sale_User" FromRole="User" ToRole="Sale" />
         </EntityType>
-        <EntityType Name="Warehouse">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="MaterialWarehouse" Relationship="Self.FK_MaterialWarehouse_Warehouse" FromRole="Warehouse" ToRole="MaterialWarehouse" />
-        </EntityType>
-        <Association Name="FK_MaterialWarehouse_Material">
-          <End Role="Material" Type="Self.Material" Multiplicity="1" />
-          <End Role="MaterialWarehouse" Type="Self.MaterialWarehouse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Material">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MaterialWarehouse">
-              <PropertyRef Name="Material_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RecipeMaterial_Material">
-          <End Role="Material" Type="Self.Material" Multiplicity="1" />
-          <End Role="RecipeMaterial" Type="Self.RecipeMaterial" Multiplicity="*" />
+          <End Type="BakeryPracticeModel.Material" Role="Material" Multiplicity="1" />
+          <End Type="BakeryPracticeModel.RecipeMaterial" Role="RecipeMaterial" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Material">
               <PropertyRef Name="Id" />
@@ -384,21 +339,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MaterialWarehouse_Warehouse">
-          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
-          <End Role="MaterialWarehouse" Type="Self.MaterialWarehouse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Warehouse">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MaterialWarehouse">
-              <PropertyRef Name="Warehouse_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Product_Recipe">
-          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="BakeryPracticeModel.Recipe" Role="Recipe" Multiplicity="1" />
+          <End Type="BakeryPracticeModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Recipe">
               <PropertyRef Name="Id" />
@@ -409,8 +352,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sale_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <End Type="BakeryPracticeModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="BakeryPracticeModel.Sale" Role="Sale" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="Id" />
@@ -421,8 +364,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RecipeMaterial_Recipe">
-          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
-          <End Role="RecipeMaterial" Type="Self.RecipeMaterial" Multiplicity="*" />
+          <End Type="BakeryPracticeModel.Recipe" Role="Recipe" Multiplicity="1" />
+          <End Type="BakeryPracticeModel.RecipeMaterial" Role="RecipeMaterial" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Recipe">
               <PropertyRef Name="Id" />
@@ -433,8 +376,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Type="BakeryPracticeModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="BakeryPracticeModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="Id" />
@@ -445,8 +388,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sale_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <End Type="BakeryPracticeModel.User" Role="User" Multiplicity="1" />
+          <End Type="BakeryPracticeModel.Sale" Role="Sale" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -456,51 +399,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BakeryPracticeEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Balance" EntityType="Self.Balance" />
-          <EntitySet Name="Material" EntityType="Self.Material" />
-          <EntitySet Name="MaterialWarehouse" EntityType="Self.MaterialWarehouse" />
-          <EntitySet Name="Product" EntityType="Self.Product" />
-          <EntitySet Name="Recipe" EntityType="Self.Recipe" />
-          <EntitySet Name="RecipeMaterial" EntityType="Self.RecipeMaterial" />
-          <EntitySet Name="Role" EntityType="Self.Role" />
-          <EntitySet Name="Sale" EntityType="Self.Sale" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="User" EntityType="Self.User" />
-          <EntitySet Name="Warehouse" EntityType="Self.Warehouse" />
-          <AssociationSet Name="FK_MaterialWarehouse_Material" Association="Self.FK_MaterialWarehouse_Material">
-            <End Role="Material" EntitySet="Material" />
-            <End Role="MaterialWarehouse" EntitySet="MaterialWarehouse" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RecipeMaterial_Material" Association="Self.FK_RecipeMaterial_Material">
-            <End Role="Material" EntitySet="Material" />
-            <End Role="RecipeMaterial" EntitySet="RecipeMaterial" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MaterialWarehouse_Warehouse" Association="Self.FK_MaterialWarehouse_Warehouse">
-            <End Role="Warehouse" EntitySet="Warehouse" />
-            <End Role="MaterialWarehouse" EntitySet="MaterialWarehouse" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Recipe" Association="Self.FK_Product_Recipe">
-            <End Role="Recipe" EntitySet="Recipe" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sale_Product" Association="Self.FK_Sale_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Sale" EntitySet="Sale" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RecipeMaterial_Recipe" Association="Self.FK_RecipeMaterial_Recipe">
-            <End Role="Recipe" EntitySet="Recipe" />
-            <End Role="RecipeMaterial" EntitySet="RecipeMaterial" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sale_User" Association="Self.FK_Sale_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Sale" EntitySet="Sale" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -510,8 +408,8 @@
           <EntitySetMapping Name="Balance">
             <EntityTypeMapping TypeName="BakeryPracticeModel.Balance">
               <MappingFragment StoreEntitySet="Balance">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Summ" ColumnName="Summ" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -519,99 +417,82 @@
             <EntityTypeMapping TypeName="BakeryPracticeModel.Material">
               <MappingFragment StoreEntitySet="Material">
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MaterialWarehouse">
-            <EntityTypeMapping TypeName="BakeryPracticeModel.MaterialWarehouse">
-              <MappingFragment StoreEntitySet="MaterialWarehouse">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Material_Id" ColumnName="Material_Id" />
-                <ScalarProperty Name="Warehouse_Id" ColumnName="Warehouse_Id" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="BakeryPracticeModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
                 <ScalarProperty Name="LeftTimeToLive" ColumnName="LeftTimeToLive" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Recipe_Id" ColumnName="Recipe_Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Recipe">
             <EntityTypeMapping TypeName="BakeryPracticeModel.Recipe">
               <MappingFragment StoreEntitySet="Recipe">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="TimeToLive" ColumnName="TimeToLive" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="TimeToLive" ColumnName="TimeToLive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RecipeMaterial">
             <EntityTypeMapping TypeName="BakeryPracticeModel.RecipeMaterial">
               <MappingFragment StoreEntitySet="RecipeMaterial">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Recipe_Id" ColumnName="Recipe_Id" />
                 <ScalarProperty Name="Material_Id" ColumnName="Material_Id" />
+                <ScalarProperty Name="Recipe_Id" ColumnName="Recipe_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
             <EntityTypeMapping TypeName="BakeryPracticeModel.Role">
               <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sale">
             <EntityTypeMapping TypeName="BakeryPracticeModel.Sale">
               <MappingFragment StoreEntitySet="Sale">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="BakeryPracticeModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="BakeryPracticeModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Warehouse">
-            <EntityTypeMapping TypeName="BakeryPracticeModel.Warehouse">
-              <MappingFragment StoreEntitySet="Warehouse">
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

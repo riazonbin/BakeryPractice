@@ -97,9 +97,6 @@
     <Compile Include="ADOApp\Material.cs">
       <DependentUpon>BakeryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ADOApp\MaterialWarehouse.cs">
-      <DependentUpon>BakeryModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ADOApp\Product.cs">
       <DependentUpon>BakeryModel.tt</DependentUpon>
     </Compile>
@@ -119,9 +116,6 @@
       <DependentUpon>BakeryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOApp\User.cs">
-      <DependentUpon>BakeryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOApp\Warehouse.cs">
       <DependentUpon>BakeryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">

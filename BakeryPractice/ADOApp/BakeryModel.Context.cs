@@ -27,7 +27,6 @@ namespace BakeryPractice.ADOApp
     
         public virtual DbSet<Balance> Balance { get; set; }
         public virtual DbSet<Material> Material { get; set; }
-        public virtual DbSet<MaterialWarehouse> MaterialWarehouse { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Recipe> Recipe { get; set; }
         public virtual DbSet<RecipeMaterial> RecipeMaterial { get; set; }
@@ -35,6 +34,5 @@ namespace BakeryPractice.ADOApp
         public virtual DbSet<Sale> Sale { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<Warehouse> Warehouse { get; set; }
     }
 }
