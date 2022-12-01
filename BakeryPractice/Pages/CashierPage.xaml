@@ -11,12 +11,12 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="4*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -37,7 +37,7 @@
                 </ListBox>
             </GroupBox>
         </ScrollViewer>
-        
+
         <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" materialDesign:BottomDashedLineAdorner.Brush="Bisque">
             <materialDesign:PackIcon Kind="Money" Foreground="Green" Width="30" Height="25"/>
             <TextBlock FontSize="18" x:Name="tbBalance" Text="0"></TextBlock>

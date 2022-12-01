@@ -47,7 +47,7 @@ namespace BakeryPractice.Pages
                 }
                 else
                 {
-                    NavigationService.Navigate(new CashierPage());
+                    NavigationService.Navigate(new CashierMainPage());
                 }
             }
         }
