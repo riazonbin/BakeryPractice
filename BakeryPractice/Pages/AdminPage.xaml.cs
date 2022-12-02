@@ -45,5 +45,11 @@ namespace BakeryPractice.Pages
 
 
         }
+
+        private void LogoutButtonClick(object sender, RoutedEventArgs e)
+        {
+            App.currentUser = null;
+            NavigationService.Navigate(new AuthorizationPage());
+        }
     }
 }

@@ -23,6 +23,7 @@ namespace BakeryPractice.Pages
         public CashierMainPage()
         {
             InitializeComponent();
+            CashierFrame.Navigate(new CashierPage());
         }
 
 
@@ -45,6 +46,12 @@ namespace BakeryPractice.Pages
         private void CashierPageButtonClick(object sender, RoutedEventArgs e)
         {
             CashierFrame.Navigate(new CashierPage());
+        }
+
+        private void LogoutButtonClick(object sender, RoutedEventArgs e)
+        {
+            App.currentUser = null;
+            NavigationService.Navigate(new AuthorizationPage());
         }
     }
 }
