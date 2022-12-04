@@ -31,7 +31,7 @@
                                 <TextBlock Text="{Binding Name, StringFormat=Наименование: {0}}"></TextBlock>
                                 <TextBlock Text="{Binding Count, StringFormat=Кол-во: {0}}" ></TextBlock>
                                 <TextBlock Text="{Binding Cost, StringFormat=Стоимость: {0}}"></TextBlock>
-                                <Button Content="Buy" Click="BuyButtonClick"></Button>
+                                <Button Content="Купить" Click="BuyButtonClick"></Button>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>

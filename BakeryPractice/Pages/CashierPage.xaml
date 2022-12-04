@@ -30,7 +30,7 @@
                                 <TextBlock Text="{Binding Name, StringFormat=Наименование: {0} }"></TextBlock>
                                 <TextBlock Text="{Binding TotalCost, StringFormat= Цена продажи: {0}}"></TextBlock>
                                 <ProgressBar Style="{x:Null}" Name="leftTimeBar" Height="15" Margin="0, 0, 0, 10" Minimum="0" Maximum="{Binding Recipe.TimeToLive}" Value="{Binding LeftTimeToLive}" Loaded="leftTimeBarLoaded"></ProgressBar>
-                                <Button Content="Sell" Click="SellButtonClick"></Button>
+                                <Button Content="Продать" Click="SellButtonClick"></Button>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
