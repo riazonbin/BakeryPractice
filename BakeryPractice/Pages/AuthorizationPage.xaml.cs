@@ -32,10 +32,15 @@ namespace BakeryPractice.Pages
         {
             if(tbLogin.Text != "" && tbPassword.Text != "")
             {
-                var dataLogin = App.Connection.User.FirstOrDefault(x => x.Login == tbLogin.Text && x.Password == tbPassword.Text);
+                var dataLogin = App.Connection.User.FirstOrDefault(x => x.Login == tbLogin.Text);
                 if(dataLogin is null)
                 {
-                    MessageBox.Show("No such user!");
+                    MessageBox.Show("Такого пользователя не существует!");
+                    return;
+                }
+                if(dataLogin.Password != tbPassword.Text)
+                {
+                    MessageBox.Show("Неверный пароль!");
                     return;
                 }
 
@@ -49,6 +54,10 @@ namespace BakeryPractice.Pages
                 {
                     NavigationService.Navigate(new CashierMainPage());
                 }
+            }
+            else
+            {
+                MessageBox.Show("Введите логин и пароль!");
             }
         }
     }

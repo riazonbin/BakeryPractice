@@ -23,7 +23,7 @@ namespace BakeryPractice.Pages
         public ReportPage()
         {
             InitializeComponent();
-            lvSales.ItemsSource = App.Connection.Sale.ToList();
+            lvSales.ItemsSource = App.Connection.Sale.Where(x => x.User_Id == App.currentUser.Id).ToList();
         }
     }
 }
