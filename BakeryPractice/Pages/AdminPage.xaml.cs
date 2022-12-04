@@ -34,6 +34,12 @@ namespace BakeryPractice.Pages
         {
             var boundData = (Material)((Button)sender).DataContext;
 
+            if(App.Connection.Balance.FirstOrDefault().Summ < boundData.Cost)
+            {
+                MessageBox.Show("Недостаточный баланс!");
+                return;
+            }
+
             boundData.Count++;
 
             App.Connection.Balance.FirstOrDefault().Summ -= boundData.Cost;
