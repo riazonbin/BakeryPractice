@@ -27,7 +27,7 @@
                         <GridViewColumn DisplayMemberBinding="{Binding Path=User.Name}">Кассир</GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Recipe.Name}">Товар</GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}">Цена</GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Date}">Дата продажи</GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Date, StringFormat='{}{0:dd.MM.yyyy}'}">Дата продажи</GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
