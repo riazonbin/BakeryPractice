@@ -37,7 +37,6 @@ namespace BakeryPractice.Pages
             if(App.Connection.Balance.FirstOrDefault().Summ < boundData.Cost)
             {
                 MessageBox.Show("Недостаточный баланс!");
-                tbBalance.Text = App.Connection.Balance.FirstOrDefault().Summ.ToString();
                 return;
             }
 
