@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BakeryPractice"
         mc:Ignorable="d"
-        Title="Bakery" Height="450" Width="800">
+        Title="Пекарня" Height="450" Width="800">
     <Grid>
         <Frame Name="MainFrame" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
